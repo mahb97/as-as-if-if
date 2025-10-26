@@ -1,18 +1,25 @@
-# like-as-though-not-a-benchmark
-the model and some similes and Dubliners 
+# as-as-if-if — Joyce-aware simile extraction for *Dubliners*
 
-Weakly supervised, strongly opinionated style coding for Joyce’s Dubliners
+> Weakly supervised, strongly linguistics-led simile detection and categorisation across *Dubliners*. Built to support rigorous, reproducible analysis and invite close reading rather than metrics alone.
 
-Linguistics first. ML can keep up.
+## Why this exists
 
-What is this: repo trains and tests a Joyce-aware simile extractor and category classifier over Dubliners, using spreadsheet as seed supervision to generate silver labels for the full text. The goal is to push recall on Joycean comparators, model CST categories, and do it with style.
+A lot of NLP work on “style” treats language as generic signal. This project starts from linguistics and literary scholarship and asks models to keep up. It operationalises a Joyce-aware pipeline that finds and classifies similes (and near-similes) in *Dubliners*, then makes errors legible so that interpretation stays central. The approach follows my Comparative Suspension Theory (CST) framing and uses categories designed for Joycean figuration: **Standard**, **Quasi**, **Quasi-Fuzzy**, **Framed**, and **Silent**.
 
-Why this exists: Because a lot of “language” work ignores linguistics. This does not. This mixes:
+## What this repo contains
 
-Seed rules / label functions from similes data
+- A prototype **simile extractor + classifier** tailored to Joycean comparators (e.g., *as*, *like*, *as if*, framed and silent comparatives).
+- A **weak-supervision recipe**: spreadsheet seeds → label functions → silver labels over the full text.
+- A simple, readable **modelling stack** (feature rules + linear models) and error analysis that supports close reading.
+- A working notebook (`LoRA_(PEFT_QLoRA)_.ipynb`) used for rapid experiments; the core method here does **not** require GPUs.
 
-Weak supervision over the full Dubliners text
+---
 
-Simple, readable models (LinearSVC, LDA)
+## Quick start
 
-Error analysis that invites close reading, not just metrics
+### 1) Environment
+
+```bash
+# python 3.10+
+pip install -U pandas numpy scikit-learn nltk spacy beautifulsoup4 tqdm jupyter
+python -m spacy download en_core_web_sm
